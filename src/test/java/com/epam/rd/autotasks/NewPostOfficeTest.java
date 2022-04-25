@@ -33,7 +33,7 @@ class NewPostOfficeTest {
     private static final String SRC_TEST_RESOURCES_DECLINED_COSTS_CSV = "src/test/resources/declinedCosts.csv";
 
     @ArchTest
-    ArchRule ruleStreams = noClasses().should().callMethodWhere(target(describe("is Collection.stream()",
+    ArchRule ruleStreams = noClasses().should().callMethodWhere(target(describe("Collection.stream() and Collection.forEach() should not be used",
             target -> "stream".equals(target.getName()) &&
                     target.getOwner().isAssignableTo(Collection.class) &&
                     target.getParameterTypes().isEmpty()
@@ -42,7 +42,6 @@ class NewPostOfficeTest {
     @ArchTest
     ArchRule ruleForEach = noClasses().should().callMethodWhere(name("forEach"));
 
-    // Done
     @ParameterizedTest
     @MethodSource("casesAddBox")
     void testAddDeclineBox(Collection<Box> boxes, Collection<Integer> values, Collection<BigDecimal> expected, Collection<BigDecimal> declinedExpected, int percent) {
@@ -57,7 +56,6 @@ class NewPostOfficeTest {
         assertEquals(declinedExpected, office.getListBox().stream().map(Box::getCost).collect(Collectors.toList()));
     }
 
-    // Done
     @ParameterizedTest
     @MethodSource("casesDeliveryBoxToRecipient")
     void testDeliveryBoxToRecipient(Params params) {
@@ -69,7 +67,6 @@ class NewPostOfficeTest {
         assertEquals(params.officeBoxes, officeListBoxes);
     }
 
-    // Done
     @ParameterizedTest
     @CsvFileSource(files = "src/test/resources/costs.csv", delimiterString = ",")
     void testCalculateCostOfBox(double weight, double volume, int value, BigDecimal expected) {
