@@ -33,7 +33,7 @@ class NewPostOfficeTest {
     private static final String SRC_TEST_RESOURCES_DECLINED_COSTS_CSV = "src/test/resources/declinedCosts.csv";
 
     @ArchTest
-    ArchRule ruleStreams = noClasses().should().callMethodWhere(target(describe("Collection.stream() and Collection.forEach() should not be used",
+    ArchRule ruleStreams = noClasses().should().callMethodWhere(target(describe("Methods Collection#stream() and Collection#forEach() should not be used",
             target -> "stream".equals(target.getName()) &&
                     target.getOwner().isAssignableTo(Collection.class) &&
                     target.getParameterTypes().isEmpty()
@@ -47,11 +47,17 @@ class NewPostOfficeTest {
     void testAddDeclineBox(Collection<Box> boxes, Collection<Integer> values, Collection<BigDecimal> expected, Collection<BigDecimal> declinedExpected, int percent) {
         NewPostOffice office = new NewPostOffice();
         Iterator<Integer> valuesIt = values.iterator();
-        boxes.forEach(b -> office.addBox(b.getAddresser(), b.getRecipient(),
-                b.getWeight(), b.getVolume(), valuesIt.next()));
+        int size = 0;
+        for (Box b : boxes) {
+            assertTrue(office.addBox(b.getAddresser(), b.getRecipient(),
+                    b.getWeight(), b.getVolume(), valuesIt.next()));
+            assertEquals(++size, office.getListBox().size());
+        }
+
         assertEquals(expected, office.getListBox().stream()
                 .map(Box::getCost)
                 .collect(Collectors.toList()));
+
         office.declineCostOfBox(percent);
         assertEquals(declinedExpected, office.getListBox().stream().map(Box::getCost).collect(Collectors.toList()));
     }
@@ -71,6 +77,20 @@ class NewPostOfficeTest {
     @CsvFileSource(files = "src/test/resources/costs.csv", delimiterString = ",")
     void testCalculateCostOfBox(double weight, double volume, int value, BigDecimal expected) {
         assertEquals(expected, NewPostOffice.calculateCostOfBox(weight, volume, value));
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(files = "src/test/resources/throws.csv", delimiterString = ",")
+    void testAddShouldThrow(String addresser, String recipient, double weight, double volume, int value) {
+        NewPostOffice office = new NewPostOffice();
+        assertThrows(IllegalArgumentException.class, () -> office.addBox(addresser, recipient, weight, volume, value));
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(files = "src/test/resources/simple.csv", delimiterString = ",")
+    void testAddShouldNotThrow(String addresser, String recipient, double weight, double volume, int value) {
+        NewPostOffice office = new NewPostOffice();
+        assertDoesNotThrow(() -> office.addBox(addresser, recipient, weight, volume, value));
     }
 
     public static Stream<Arguments> casesAddBox() {
