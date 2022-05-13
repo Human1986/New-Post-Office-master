@@ -11,6 +11,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Collection;
@@ -59,7 +60,10 @@ class NewPostOfficeTest {
                 .collect(Collectors.toList()));
 
         office.declineCostOfBox(percent);
-        assertEquals(declinedExpected, office.getListBox().stream().map(Box::getCost).collect(Collectors.toList()));
+        Iterator<BigDecimal> actual = office.getListBox().stream().map(Box::getCost).iterator();
+        declinedExpected.forEach(e -> assertEquals(
+                e.setScale(12, RoundingMode.FLOOR),
+                actual.next().setScale(12, RoundingMode.FLOOR)));
     }
 
     @ParameterizedTest
