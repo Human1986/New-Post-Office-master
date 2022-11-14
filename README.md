@@ -11,16 +11,19 @@ In this task, you will simulate the work of a new post office that takes parcels
 The Box class describes parcels. A parcel has the following characteristics: sender, recipient, weight, volume, and shipping cost  . All characteristics except for the shipping cost are passed to the constructor to create an object. The shipping cost is calculated based on the weight, volume, and value of the parcel.
 
 The `NewPostOffice` class has:
-- `NewPostOffice()` - Creates an office (an empty collection of parcels);
-- `Collection<Box> getListBox()`- Returns a collection of parcels in the office;
-- `static BigDecimal calculateCostOfBox(double weight, double volume, int value)` - Calculates the cost of a parcel.
+- `NewPostOffice()`  
+   Creates an office (an empty collection of parcels);
+- `Collection<Box> getListBox()`  
+   Returns a collection of parcels in the office;
+- `static BigDecimal calculateCostOfBox(double weight, double volume, int value)`  
+   Calculates the cost of a parcel.
 
 Please proceed to the NewPostOffice class and implement its methods using an iterator:
-- `Collection<Box> deliveryBoxToRecipient(String recipient)` 
+- `Collection<Box> deliveryBoxToRecipient(String recipient)`  
    Returns all parcels of a specified recipient; any parcels found must be removed from the office
-- `void declineCostOfBox(double percent)` 
+- `void declineCostOfBox(double percent)`  
    Changes the cost of each parcel in the office by the percentage specified.
-- `boolean addBox(String sender, String recipient, double weight, double volume, int value)` 
+- `boolean addBox(String sender, String recipient, double weight, double volume, int value)`   
    Creates a parcel, calculates its shipping cost  , and adds it to the office.
 
 ### Details:
@@ -33,3 +36,4 @@ Please proceed to the NewPostOffice class and implement its methods using an ite
 
 ### Restriction:
 You may not use the Lambdas or the Streams API.
+
