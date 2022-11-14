@@ -1,35 +1,32 @@
-# Collection iterating
+# Iterating Collections
  
-The purpose of this exercise is to train you to work with collections, namely create and add elements, iterate over them to perform operations on each element.
+The purpose of this exercise is to prepare you to work with collections—to create and add elements and iterate through   them to perform operations on each element.
 
-Estimated time - 60 minutes.
+Duration: 1 hour
 
 ## Description
 
-In this task, you will simulate the work of one of the New Post offices, which can take parcels/boxes in the range of 0.5 - 20 kg in weight and no more than 0.25 m3 in volume.
+In this task, you will simulate the work of a new post office that takes parcels weighing between 0.5 and 20 kg and with a maximum volume of 0.25 m3
 
-You have the Box class that describes a parcel. 
-The parcel has the following characteristics: sender, recipient, weight, volume, cost. All characteristics, except for the cost, is passed to the constructor to create an object. 
-The cost is calculated based on the value of weight, volume, and value.
+The Box class describes parcels. A parcel has the following characteristics: sender, recipient, weight, volume, and shipping cost  . All characteristics except for the shipping cost are passed to the constructor to create an object. The shipping cost is calculated based on the weight, volume, and value of the parcel.
 
 The `NewPostOffice` class has:
 - `NewPostOffice()` - creates an office (an empty collection of parcels);
 - `Collection<Box> getListBox()` - returns a collection of parcels in the office;
 - `static BigDecimal calculateCostOfBox(double weight, double volume, int value)` - calculates the cost of a parcel.
 
-Please, proceed to the NewPostOffice class and implement its methods using an iterator:
-- `Collection<Box> deliveryBoxToRecipient(String recipient)` - returns all parcels of the specified recipient. Parcels found must be removed from the office.
-- `void declineCostOfBox(double percent)` - changes the cost of each parcel in the office by the specified percent.
-- `boolean addBox(String sender, String recipient, double weight, double volume, int value)` – creates a parcel, calculates its cost and adds it to the office.
+Please proceed to the NewPostOffice class and implement its methods using an iterator:
+- `Collection<Box> deliveryBoxToRecipient(String recipient)` - returns all parcels of a specified recipient; any parcels found must be removed from the office
+- `void declineCostOfBox(double percent)` - changes the cost of each parcel in the office by the percentage specified.
+- `boolean addBox(String sender, String recipient, double weight, double volume, int value)` – creates a parcel, calculates its shipping cost  , and adds it to the office.
 
 ### Details:
 
-- The sender and receiver must exist
-- The weight must be in the range 0.5 - 20.0 kg
-- The volume must be greater than zero and less than 0.25 m3
-- The value must be greater than zero
-- If the above data gets invalid values, then the java.lang.IllegalArgumentException is thrown
-
+·	The sender and receiver must exist.
+·	The weight must be 0.5–20.0 kg.
+·	The volume must be greater than 0 and less than 0.25 m3.
+·	The value must be greater than 
+·	If the values of the data above are set incorrectly (by specifying invalid values), the java.lang.IllegalArgumentException is thrown.
 
 ### Restriction:
-- it is forbidden to use Lambda and Streams API.
+You may not use the Lambdas or the Streams API.
