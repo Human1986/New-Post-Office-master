@@ -2,13 +2,13 @@
  
 The purpose of this exercise is to prepare you to work with collections—to create and add elements and iterate through   them to perform operations on each element.
 
-Duration: 1 hour
+Duration - **1 hour**
 
 ## Description
 
 In this task, you will simulate the work of a new post office that takes parcels weighing between 0.5 and 20 kg and with a maximum volume of 0.25 m3
 
-The Box class describes parcels. A parcel has the following characteristics: sender, recipient, weight, volume, and shipping cost  . All characteristics except for the shipping cost are passed to the constructor to create an object. The shipping cost is calculated based on the weight, volume, and value of the parcel.
+The Box class describes parcels. A parcel has the following characteristics: sender, recipient, weight, volume, and shipping cost. All characteristics except for the shipping cost are passed to the constructor to create an object. The shipping cost is calculated based on the weight, volume, and value of the parcel.
 
 The `NewPostOffice` class has:
 - `NewPostOffice()`  
@@ -34,6 +34,6 @@ Please proceed to the NewPostOffice class and implement its methods using an ite
 ·	The value must be greater than 
 ·	If the values of the data above are set incorrectly (by specifying invalid values), the java.lang.IllegalArgumentException is thrown.
 
-### Restriction:
+## Restriction:
 You may not use the Lambdas or the Streams API.
 
