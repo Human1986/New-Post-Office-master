@@ -2,7 +2,7 @@
  
 The purpose of this exercise is to prepare you to work with collections—to create and add elements and iterate through   them to perform operations on each element.
 
-Duration - **1 hour**
+Duration: **1 hour**
 
 ## Description
 
