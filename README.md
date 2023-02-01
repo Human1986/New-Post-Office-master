@@ -31,7 +31,7 @@ Please proceed to the NewPostOffice class and implement its methods using an ite
 * The sender and receiver must exist.
 * The weight must be 0.5–20.0 kg.
 * The volume must be greater than 0 and less than 0.25 m3.
-* The value must be greater than 
+* The value must be greater than zero.
 * If the values of the data above are set incorrectly (by specifying invalid values), the java.lang.IllegalArgumentException is thrown.
 
 ## Restriction:
