@@ -32,6 +32,7 @@ Please proceed to the NewPostOffice class and implement its methods using an ite
 * The weight must be 0.5–20.0 kg.
 * The volume must be greater than 0 and less than 0.25 m3.
 * The value must be greater than zero.
+* The cost of a parcel is calculated as follows: the weight is multiplied by the cost of one kilogram, the volume is multiplied by the cost of one cubic meter, the value is multiplied by a given coefficient, then everything is summed up.
 * If the values of the data above are set incorrectly (by specifying invalid values), the java.lang.IllegalArgumentException is thrown.
 
 ## Restriction:
