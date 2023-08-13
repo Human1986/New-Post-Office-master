@@ -4,12 +4,14 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
 public class NewPostOffice {
     private static final int COST_KILOGRAM = 5;
     private static final int COST_CUBIC_METER = 100;
     private static final double COEFFICIENT = 0.5;
     private final Collection<Box> listBox;
+
 
     public NewPostOffice() {
         listBox = new ArrayList<>();
@@ -25,7 +27,7 @@ public class NewPostOffice {
     }
 
     public Collection<Box> getListBox() {
-        return (Collection<Box>) ((ArrayList<Box>) listBox).clone();
+        return  listBox;
     }
 
     // implements student
@@ -50,17 +52,25 @@ public class NewPostOffice {
 
     // implements student
     public Collection<Box> deliveryBoxToRecipient(String recipient) {
-        listBox.removeIf(box -> box.getRecipient().equals(recipient));
-        return listBox;
+        Collection<Box> recipientParcels = new ArrayList<>();
+        Iterator<Box> iterator = listBox.iterator();
+        while (iterator.hasNext()) {
+            Box box = iterator.next();
+            if (box.getRecipient().equals(recipient)) {
+                recipientParcels.add(box);
+                iterator.remove();
+            }
+        }
+        return recipientParcels;
+
     }
 
     public void declineCostOfBox(double percent) {
         for (Box box : listBox) {
-            BigDecimal percentDecline = new BigDecimal(percent);
-//            BigDecimal cost = NewPostOffice.calculateCostOfBox(box.getWeight(), box.getVolume(), box.getCost());
-            if (box.getCost() == null) box.setCost(box.getCost().add(percentDecline));
+            BigDecimal oldCost = box.getCost();
+            BigDecimal reduction = oldCost.multiply(BigDecimal.valueOf(percent / 100.0));
+            BigDecimal newCost = oldCost.subtract(reduction).round(MathContext.DECIMAL64);
+            box.setCost(newCost);
         }
-
     }
-
 }
